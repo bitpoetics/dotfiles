@@ -46,7 +46,7 @@ cask "chatgpt"
 cask "claude"
 cask "deepl"
 cask "discord"
-# cask "dropbox"
+cask "dropbox"
 cask "google-chrome"
 cask "google-drive"
 cask "iterm2"
@@ -64,7 +64,7 @@ mas "1Password 7 - Password Manager", id: 1333542190
 mas "Brother iPrint&Scan", id: 1193539993
 mas "Kindle", id: 302584613
 mas "LINE", id: 539883307
-# mas "Magnet", id: 441258766
+mas "Magnet", id: 441258766
 mas "Slack", id: 803453959
 mas "Toggl Track", id: 1291898086
 mas "Transporter", id: 1450874784
