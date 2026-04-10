@@ -1,0 +1,71 @@
+# Homebrew Tap
+tap "oven-sh/bun"
+tap "satococoa/tap"
+
+# Homebrew Cask args
+cask_args appdir: "/Applications"
+
+# Homebrew
+brew "anyenv"
+brew "bun"
+brew "carthage"
+brew "cloc"
+brew "cocoapods"
+brew "curl"
+brew "fastlane"
+brew "firebase-cli"
+brew "gh"
+brew "gibo"
+brew "git"
+brew "jq"
+brew "lazygit"
+brew "mas"
+brew "mint"
+brew "neovim"
+brew "node-build"
+# for openjdk
+# https://formulae.brew.sh/formula/openjdk
+# sudo ln -sfn $(brew --prefix)/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+brew "openjdk"
+brew "pkgconfig"
+brew "ruby"
+brew "ruby-build"
+brew "rustup"
+brew "tree"
+brew "vim"
+brew "wget"
+brew "satococoa/tap/wtp"
+brew "xcodegen"
+brew "zsh"
+brew "zsh-completions"
+
+# Homebrew Cask
+cask "alfred"
+cask "brave-browser"
+cask "chatgpt"
+cask "claude"
+cask "deepl"
+cask "discord"
+# cask "dropbox"
+cask "google-chrome"
+cask "google-drive"
+cask "iterm2"
+cask "karabiner-elements"
+cask "notion"
+cask "openvpn-connect"
+cask "postman"
+cask "sf-symbols"
+cask "visual-studio-code"
+cask "xcodes-app"
+cask "zoom"
+
+# Mac App Store
+mas "1Password 7 - Password Manager", id: 1333542190
+mas "Brother iPrint&Scan", id: 1193539993
+mas "Kindle", id: 302584613
+mas "LINE", id: 539883307
+# mas "Magnet", id: 441258766
+mas "Slack", id: 803453959
+mas "Toggl Track", id: 1291898086
+mas "Transporter", id: 1450874784
+

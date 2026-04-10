@@ -1,0 +1,6 @@
+# Local zshenv
+LOCAL_FILE="$HOME/.zshenv.local"
+if [[ -f "$LOCAL_FILE" ]]; then
+    source "$LOCAL_FILE"
+fi
+

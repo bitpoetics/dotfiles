@@ -1,0 +1,41 @@
+[core]
+    ignorecase = false
+
+[init]
+    defaultBranch = main
+
+[fetch]
+    prune = true
+
+[pull]
+    ff = only
+    rebase = false
+
+[merge]
+    ff = false
+
+[color]
+    ui = true
+
+[alias]
+    br = branch
+    co = checkout
+    ft = fetch
+    pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
+    st = status
+    df = diff
+    ci = commit
+    ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
+
+[filter "lfs"]
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+
+[include]
+    path = ~/.config/git/config.local
+
+[includeIf "gitdir:~/Path/to/Dir/"]
+    path = ~/.gitconfig.foo
+

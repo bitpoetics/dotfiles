@@ -1,0 +1,19 @@
+alias g='git'
+alias cl='clear'
+alias cld='claude'
+alias lg='lazygit'
+alias ll='ls -la'
+alias vi="$(brew --prefix)/bin/vim"
+alias vim="$(brew --prefix)/bin/vim"
+# https://qiita.com/kiyodori/items/0fcc87bb8ab1cb31c731#mac%E3%81%AE%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5
+alias remove_library_caches='sudo rm -rf /System/Library/Caches/* /Library/Caches/* ~/Library/Caches/*'
+# https://qiita.com/shtnkgm/items/c96a58579ec406194fa8#deriveddata%E4%B8%AD%E9%96%93%E7%94%9F%E6%88%90%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%89%8A%E9%99%A4
+alias remove_library_derived_data='rm -rf ~/Library/Developer/Xcode/DerivedData/*'
+# https://zenn.dev/ytdrep/articles/bd17c040a952cc
+alias remove_library_simulator_caches='rm -rf ~/Library/Developer/CoreSimulator/Caches/*'
+# https://qiita.com/kiyodori/items/0fcc87bb8ab1cb31c731#adobe%E3%81%AE%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5
+alias remove_adobe_caches='rm -rf ~/Library/Application\ Support/Adobe/Common/Media\ Cache/* ~/Library/Application\ Support/Adobe/Common/Media\ Cache\ Files/*'
+alias remove_cocoa_pods_caches='rm -rf ~/Library/Caches/CocoaPods/'
+# https://qiita.com/devzooiiooz/items/8babd82f780f01812f9d
+alias bundle_config_vendor="bundle config set path 'vendor/bundle' && bundle binstubs --path=vendor/bin"
+

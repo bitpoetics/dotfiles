@@ -1,0 +1,53 @@
+#export PATH=/opt/homebrew/bin:$PATH
+
+source $HOME/.zshrc.aliases
+
+# ja
+export LANG=ja_JP.UTF-8
+setopt print_eight_bit
+
+# history
+setopt share_history
+setopt hist_reduce_blanks
+setopt hist_ignore_all_dups
+
+# zsh-completions
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    autoload -Uz compinit && compinit
+fi
+
+# anyenv
+eval "$(anyenv init -)"
+
+# git-prompt
+source ~/.zsh/git-prompt.sh
+
+# git-completion
+fpath=(~/.zsh $fpath)
+zstyle ":completion:*:*:git:*" script ~/.zsh/git-completion.bash
+autoload -Uz compinit && compinit
+
+# prompt
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUPSTREAM=auto
+setopt PROMPT_SUBST ; PS1='%F{green}%n@%m%f %F{yellow}$(uname -m): %F{cyan}%~%f %F{red}$(__git_ps1 "(%s)")%f
+\$ '
+
+# mint
+# https://github.com/yonaskolb/Mint/issues/188#issuecomment-820363401
+export MINT_PATH="$HOME/.mint"
+export MINT_LINK_PATH="$MINT_PATH/bin"
+
+# Claude Code
+export PATH="$HOME/.local/bin:$PATH"
+
+# Local zshrc
+LOCAL_FILE="$HOME/.zshrc.local"
+if [[ -f "$LOCAL_FILE" ]]; then
+    source "$LOCAL_FILE"
+fi
+
