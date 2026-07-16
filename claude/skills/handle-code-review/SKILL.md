@@ -26,10 +26,11 @@ argument-hint: "[PR番号 or URL] [auto]"
 
 ```shell
 gh api graphql -f query='
-query($owner: String!, $repo: String!, $pr: Int!) {
+query($owner: String!, $repo: String!, $pr: Int!, $after: String) {
   repository(owner: $owner, name: $repo) {
     pullRequest(number: $pr) {
-      reviewThreads(first: 100) {
+      reviewThreads(first: 100, after: $after) {
+        pageInfo { hasNextPage endCursor }
         nodes {
           isResolved
           comments(first: 20) {
@@ -41,6 +42,8 @@ query($owner: String!, $repo: String!, $pr: Int!) {
   }
 }' -F owner={owner} -F repo={repo} -F pr={PR番号}
 ```
+
+`hasNextPage` が `true` の場合は `-F after={endCursor}` を付けて、すべてのスレッドを取得するまで繰り返します。
 
 ## 手順
 
@@ -65,7 +68,7 @@ query($owner: String!, $repo: String!, $pr: Int!) {
 レビュースレッドへの返信は以下のREST APIで行います。`{comment_id}` にはスレッド先頭コメントの `databaseId` を指定します。
 
 ```shell
-gh api repos/{owner}/{repo}/pulls/{PR番号}/comments/{comment_id}/replies -f body='返信内容'
+gh api -X POST repos/{owner}/{repo}/pulls/{PR番号}/comments/{comment_id}/replies -f body='返信内容'
 ```
 
 ## 安全ガード（両モード共通）
