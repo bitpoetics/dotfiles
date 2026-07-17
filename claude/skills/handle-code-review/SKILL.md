@@ -1,10 +1,8 @@
 ---
 name: handle-code-review
 description: PRのコードレビュー結果について対処します。
-allowed-tools: Read, Grep, Glob, Edit, mcp__github__pull_request_read, mcp__github__add_issue_comment
+allowed-tools: Read, Grep, Glob, Edit, Bash(git:*), Bash(gh:*), mcp__github__pull_request_read
 argument-hint: "[PR番号 or URL] [auto]"
-# 自律モード（auto）を使用する場合は Bash を追加してください
-# allowed-tools: Read, Grep, Glob, Edit, Bash, mcp__github__pull_request_read, mcp__github__add_issue_comment
 ---
 
 ## 引数
@@ -24,6 +22,29 @@ argument-hint: "[PR番号 or URL] [auto]"
 - コメントのURLが指定された場合: そのコメントのみを対象にします
 - 上記以外: PR内の未解決コメントすべてを対象にします
 
+未解決コメント（未解決のレビュースレッド）は以下のGraphQLクエリで取得し、`isResolved: false` のスレッドのみを対象にします。
+
+```shell
+gh api graphql -f query='
+query($owner: String!, $repo: String!, $pr: Int!, $after: String) {
+  repository(owner: $owner, name: $repo) {
+    pullRequest(number: $pr) {
+      reviewThreads(first: 100, after: $after) {
+        pageInfo { hasNextPage endCursor }
+        nodes {
+          isResolved
+          comments(first: 20) {
+            nodes { databaseId author { login } body path line url }
+          }
+        }
+      }
+    }
+  }
+}' -F owner={owner} -F repo={repo} -F pr={PR番号}
+```
+
+`hasNextPage` が `true` の場合は `-F after={endCursor}` を付けて、すべてのスレッドを取得するまで繰り返します。
+
 ## 手順
 
 ### 通常モード
@@ -42,3 +63,16 @@ argument-hint: "[PR番号 or URL] [auto]"
 3. 変更内容をコミットし、リモートにプッシュします
 4. 対処の有無にかかわらず、すべての対象コメントに個別にスレッド形式で返信します。対処した場合はその内容を、対処不要と判断した場合はその理由を記載します
 
+## スレッドへの返信方法
+
+レビュースレッドへの返信は以下のREST APIで行います。`{comment_id}` にはスレッド先頭コメントの `databaseId` を指定します。
+
+```shell
+gh api -X POST repos/{owner}/{repo}/pulls/{PR番号}/comments/{comment_id}/replies -f body='返信内容'
+```
+
+## 安全ガード（両モード共通）
+
+- プッシュ先は必ずPRのheadブランチとし、push前に現在のブランチがそれと一致することを確認します
+- `main` などのデフォルトブランチへの直接プッシュは行いません
+- force push は行いません
