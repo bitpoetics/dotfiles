@@ -42,6 +42,8 @@ brew "zsh"
 brew "zsh-completions"
 
 # Homebrew Cask
+cask "1password"
+cask "1password-cli"
 cask "alfred"
 cask "brave-browser"
 cask "chatgpt"
@@ -63,7 +65,6 @@ cask "xcodes-app"
 cask "zoom"
 
 # Mac App Store
-mas "1Password 7 - Password Manager", id: 1333542190
 mas "Brother iPrint&Scan", id: 1193539993
 mas "Kindle", id: 302584613
 mas "LINE", id: 539883307
