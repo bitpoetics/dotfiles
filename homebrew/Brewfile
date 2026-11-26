@@ -1,6 +1,5 @@
 # Homebrew Tap
 tap "oven-sh/bun"
-tap "satococoa/tap"
 
 # Homebrew Cask args
 cask_args appdir: "/Applications"
@@ -36,7 +35,6 @@ brew "rustup"
 brew "tree"
 brew "vim"
 brew "wget"
-brew "satococoa/tap/wtp"
 brew "xcodegen"
 brew "zsh"
 brew "zsh-completions"
